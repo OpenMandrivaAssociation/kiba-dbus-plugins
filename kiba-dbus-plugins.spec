@@ -1,5 +1,5 @@
 %define svn	722
-%define release %mkrel 0.%{svn}.3
+%define release 0.%{svn}.2
 
 %define python_compile_opt python -O -c "import compileall; compileall.compile_dir('.')"
 %define python_compile     python -c "import compileall; compileall.compile_dir('.')"
@@ -11,8 +11,8 @@ Summary:	D-Bus plugins for Kiba-Dock
 Group:		System/X11
 URL:		http://www.kiba-dock.org/
 Source0:	%{name}-%{svn}.tar.lzma
+patch0:		kiba-dbus-plugins-722.kiba-doc-version.patch
 License:	GPLv2+
-BuildRoot:	%{_tmppath}/%{name}-root
 BuildArch:	noarch
 BuildRequires:	kiba-dock-devel = %{version}
 BuildRequires:	intltool
@@ -25,6 +25,7 @@ D-Bus plugins for Kiba-Dock.
 
 %prep
 %setup -q -n %{name}
+%patch0 -p1 -b .kiba-doc-version
 
 %build
 sh autogen.sh -V
@@ -32,7 +33,6 @@ sh autogen.sh -V
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 %find_lang kiba-dbus-plugin
 
@@ -46,9 +46,6 @@ install -m 0644 kiba-$i.pyc kiba-$i.pyo %{buildroot}%{_datadir}/kiba-dock/dbus_s
 done
 popd
 
-%clean
-rm -rf %{buildroot}
-
 %files -f kiba-dbus-plugin.lang
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog
@@ -59,3 +56,15 @@ rm -rf %{buildroot}
 %{_datadir}/kiba-dock/icons/kiba-mail
 %{_datadir}/kiba-dock/icons/kiba-signal
 %{_datadir}/kiba-dock/icons/kiba-weather
+
+
+%changelog
+* Fri Sep 04 2009 Thierry Vignaud <tvignaud@mandriva.com> 0.1-0.722.2mdv2010.0
++ Revision: 429671
+- rebuild
+
+* Thu Mar 06 2008 Adam Williamson <awilliamson@mandriva.org> 0.1-0.722.1mdv2008.1
++ Revision: 180307
+- import kiba-dbus-plugins
+
+
