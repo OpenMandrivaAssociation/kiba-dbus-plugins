@@ -30,8 +30,6 @@ D-Bus plugins for Kiba-Dock.
 %patch0 -p1 -b .kiba-doc-version
 
 %build
-export PYTHON=%{__python2}
-
 sh autogen.sh -V
 %configure
 %make
@@ -39,6 +37,9 @@ sh autogen.sh -V
 %install
 %makeinstall_std
 %find_lang kiba-dbus-plugin
+
+ln -s %{_bindir}/python2 python
+export PATH=`pwd`:$PATH
 
 pushd scripts
 %python_compile_opt
@@ -51,7 +52,6 @@ done
 popd
 
 %files -f kiba-dbus-plugin.lang
-%defattr(-,root,root)
 %doc AUTHORS ChangeLog
 %{_datadir}/kiba-dock/config_schemas/plugins/python_scripts.xml
 %{_datadir}/kiba-dock/dbus_scripts
