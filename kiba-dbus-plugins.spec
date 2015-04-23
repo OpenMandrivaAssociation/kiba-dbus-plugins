@@ -18,6 +18,8 @@ BuildRequires:	kiba-dock-devel = %{version}
 BuildRequires:	intltool
 BuildRequires:	dbus-devel
 BuildRequires:	pygtk2.0-devel
+BuildRequires:	python2-devel
+
 Requires:	kiba-dock
 
 %description
@@ -28,8 +30,10 @@ D-Bus plugins for Kiba-Dock.
 %patch0 -p1 -b .kiba-doc-version
 
 %build
+export PYTHON=%{__python2}
+
 sh autogen.sh -V
-%configure2_5x
+%configure
 %make
 
 %install
@@ -56,15 +60,3 @@ popd
 %{_datadir}/kiba-dock/icons/kiba-mail
 %{_datadir}/kiba-dock/icons/kiba-signal
 %{_datadir}/kiba-dock/icons/kiba-weather
-
-
-%changelog
-* Fri Sep 04 2009 Thierry Vignaud <tvignaud@mandriva.com> 0.1-0.722.2mdv2010.0
-+ Revision: 429671
-- rebuild
-
-* Thu Mar 06 2008 Adam Williamson <awilliamson@mandriva.org> 0.1-0.722.1mdv2008.1
-+ Revision: 180307
-- import kiba-dbus-plugins
-
-
