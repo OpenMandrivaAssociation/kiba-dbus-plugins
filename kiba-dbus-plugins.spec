@@ -9,7 +9,7 @@ Version:	0.1
 Release:	%{release}
 Summary:	D-Bus plugins for Kiba-Dock
 Group:		System/X11
-URL:		http://www.kiba-dock.org/
+URL:		https://www.kiba-dock.org/
 Source0:	%{name}-%{svn}.tar.lzma
 patch0:		kiba-dbus-plugins-722.kiba-doc-version.patch
 License:	GPLv2+
